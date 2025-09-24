@@ -2,7 +2,7 @@ name: Run All Reports
 
 on:
   schedule:
-    - cron: "0 16 * * *"   # Runs every day at 6:00 AM (UTC)
+    - cron: "0 16 * * *"   # Runs every day at 6:00 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -10,33 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the repository
+      # Checkout repository
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2. Set up Python
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      # 3. Install Python dependencies
+      # Install Python dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
 
-      # 4. Install Playwright browsers
+      # Install Playwright browsers
       - name: Install Playwright browsers
-        run: |
-          python -m playwright install chromium
+        run: python -m playwright install chromium
 
-      # 5. Run all reports in headless mode
+      # Run all reports in headless mode
       - name: Run all reports
         env:
+          HEADLESS: true
           ERP_USERNAME: ${{ secrets.ERP_USERNAME }}
           ERP_PASSWORD: ${{ secrets.ERP_PASSWORD }}
           SP_USERNAME: ${{ secrets.SP_USERNAME }}
           SP_PASSWORD: ${{ secrets.SP_PASSWORD }}
-        run: |
-          python run_all.py
+        run: python run_all.py
