@@ -13,7 +13,7 @@ def run(playwright: Playwright) -> None:
     page = context.new_page()
 
     # Open login page
-    page.goto("http://13.235.198.88/focus8w/", timeour=120000)
+    page.goto("http://13.235.198.88/focus8w/", timeout=120000)  # 120 seconds
 
     # 🔐 Login
     page.wait_for_selector("#txtUsername", timeout=60000)
@@ -51,5 +51,6 @@ def run(playwright: Playwright) -> None:
 
 with sync_playwright() as playwright:
     run(playwright)
+
 
 
