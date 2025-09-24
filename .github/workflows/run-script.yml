@@ -23,6 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
 
+      - name: Install Playwright browsers
+        run: |
+          python -m playwright install chromium
+
       - name: Run all reports
         env:
           ERP_USERNAME: ${{ secrets.ERP_USERNAME }}
