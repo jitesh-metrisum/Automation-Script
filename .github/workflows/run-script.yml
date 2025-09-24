@@ -2,7 +2,7 @@ name: Run All Reports
 
 on:
   schedule:
-    - cron: "0 16 * * *"   # Runs every day at 16:00 UTC
+    - cron: "0 16 * * *"   # Runs every day at 6:00 AM (UTC)
   workflow_dispatch:
 
 jobs:
@@ -25,8 +25,8 @@ jobs:
 
       - name: Run all reports
         env:
-          ERP_USERNAME: ${{MIS Local}}
-          ERP_PASSWORD: ${{Mis@123}}
+          ERP_USERNAME: ${{ secrets.ERP_USERNAME }}
+          ERP_PASSWORD: ${{ secrets.ERP_PASSWORD }}
           SP_USERNAME: ${{ secrets.SP_USERNAME }}
           SP_PASSWORD: ${{ secrets.SP_PASSWORD }}
         run: |
