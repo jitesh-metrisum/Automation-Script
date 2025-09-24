@@ -8,7 +8,7 @@ def run(playwright: Playwright) -> None:
     # Ensure the folder exists
     os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context(accept_downloads=True)
     page = context.new_page()
 
@@ -51,3 +51,4 @@ def run(playwright: Playwright) -> None:
 
 with sync_playwright() as playwright:
     run(playwright)
+
